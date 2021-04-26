@@ -8,7 +8,7 @@ int main()
 {
     srand(time(0));
 
-    int size = 400;
+    int size = 150;
     if (size % 2 == 0)
         size++;
 
