@@ -1,24 +1,21 @@
 #include <iostream>
 #include <stdlib.h>
 #include <ctime>
+#include <fstream>
 
 using namespace std;
 
-
-
 int main(int argc, char **argv)
 {
+    ofstream outputFile;
     int size = 20;
 
-    cout << size << endl;
     srand(time(0));
 
     size = (size % 2 == 0) ? size + 1 : size;
-
     int array[size][size];
 
     for (int x = 0; x < size; x++) // generate walls and bases
-    {
         for (int y = 0; y < size; y++)
         {
             if ((x == 0 || x == size - 1) || (y == 0 || y == size - 1))
@@ -28,7 +25,6 @@ int main(int argc, char **argv)
             else
                 array[x][y] = 0;
         }
-    }
 
     while (true)
     {
@@ -42,21 +38,16 @@ int main(int argc, char **argv)
         if (numberOfBases == 0) // exit when there are no bases left
             break;
 
-        int randomBase = (numberOfBases == 1) ? 1 : rand() % numberOfBases; // get random base
+        int randomBase = rand() % numberOfBases; // get random base
 
         int currentBase = 0;
         for (int x = 2; x < size; x += 2)
-        {
             for (int y = 2; y < size; y += 2)
             {
-                if (array[x][y] == 2)
-                    currentBase++;
-
                 if (currentBase == randomBase)
                 {
                     int direction = rand() % 4; // get random direction
                     int i = 0;
-
                     while (true)
                     {
                         int tmpX = (direction < 2) ? x : x + i;
@@ -70,15 +61,23 @@ int main(int argc, char **argv)
                         i += (direction % 2 == 0) ? -1 : 1;
                     }
                 }
+
+                if (array[x][y] == 2)
+                    currentBase++;
             }
-        }
     }
 
+    outputFile.open("maze.txt");
     for (int x = 0; x < size; x++)
     {
         for (int y = 0; y < size; y++)
+        {
             cout << ((array[x][y] == 1) ? "#" : " ");
+            outputFile << array[x][y];
+        }
+        outputFile << endl;
         cout << endl;
     }
+    outputFile.close();
     return 0;
 }
