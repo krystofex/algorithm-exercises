@@ -4,16 +4,20 @@
 
 using namespace std;
 
-int main()
+
+
+int main(int argc, char **argv)
 {
+    int size = 20;
+
+    cout << size << endl;
     srand(time(0));
 
-    int size = 20;
     size = (size % 2 == 0) ? size + 1 : size;
 
     int array[size][size];
 
-    for (int x = 0; x < size; x++)
+    for (int x = 0; x < size; x++) // generate walls and bases
     {
         for (int y = 0; y < size; y++)
         {
@@ -41,39 +45,30 @@ int main()
         int randomBase = (numberOfBases == 1) ? 1 : rand() % numberOfBases; // get random base
 
         int currentBase = 0;
-        for (int x = 0; x < size; x++)
+        for (int x = 2; x < size; x += 2)
         {
-            for (int y = 0; y < size; y++)
+            for (int y = 2; y < size; y += 2)
             {
                 if (array[x][y] == 2)
                     currentBase++;
 
                 if (currentBase == randomBase)
                 {
-                    int direction = rand() % 4;
+                    int direction = rand() % 4; // get random direction
                     int i = 0;
 
                     while (true)
                     {
-                        if (direction < 2)
-                        {
-                            if (array[x][y + i] == 1)
-                                break;
-                            else
-                                array[x][y + i] = 1;
-                        }
+                        int tmpX = (direction < 2) ? x : x + i;
+                        int tmpY = (direction > 1) ? y : y + i;
 
+                        if (array[tmpX][tmpY] == 1)
+                            break;
                         else
-                        {
-                            if (array[x + 1][y] == 1)
-                                break;
-                            else
-                                array[x + 1][y] = 1;
-                        }
+                            array[tmpX][tmpY] = 1;
 
-                        i += (direction % 2 == 1) ? -1 : 1;
+                        i += (direction % 2 == 0) ? -1 : 1;
                     }
-                    break;
                 }
             }
         }
@@ -82,10 +77,7 @@ int main()
     for (int x = 0; x < size; x++)
     {
         for (int y = 0; y < size; y++)
-        {
-            char character = array[x][y] == 1 ? '#' : ' ';
-            cout << character;
-        }
+            cout << ((array[x][y] == 1) ? "#" : " ");
         cout << endl;
     }
     return 0;
