@@ -8,8 +8,7 @@ using namespace std;
 int main(int argc, char **argv)
 {
     ofstream outputFile;
-    int size = 20;
-
+    int size = 10;
     srand(time(0));
 
     size = (size % 2 == 0) ? size + 1 : size;
@@ -55,6 +54,7 @@ int main(int argc, char **argv)
 
                         if (array[tmpX][tmpY] == 1)
                             break;
+
                         else
                             array[tmpX][tmpY] = 1;
 
@@ -67,6 +67,7 @@ int main(int argc, char **argv)
             }
     }
 
+    // output maze to file
     outputFile.open("maze.txt");
     for (int x = 0; x < size; x++)
     {
@@ -79,5 +80,27 @@ int main(int argc, char **argv)
         cout << endl;
     }
     outputFile.close();
+
+    outputFile.open("maze.json");
+
+    outputFile
+        << "[" << endl;
+    for (int x = 0; x < size; x++)
+    {
+        outputFile << "  [";
+        for (int y = 0; y < size; y++)
+        {
+            outputFile << array[x][y];
+            if (y < size - 1)
+                outputFile << ", ";
+        }
+        outputFile << "]";
+        if (x < size - 1)
+            outputFile << "," << endl;
+    }
+    outputFile << endl
+               << "]";
+    outputFile.close();
+
     return 0;
 }
