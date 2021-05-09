@@ -2,5 +2,5 @@
 
 ## content:
 
-- [maze generator C++](maze-generator-cpp/)
-- [maze generator JS](maze-generator-js/)
+- [maze generator CLI - C++](maze-generator-cpp/)
+- [maze generator GUI - JS](maze-generator-js/)
