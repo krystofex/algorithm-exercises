@@ -1,6 +1,10 @@
-function generate(size) {
-    const start = new Date().getTime();
+function valueChanged() {
+    if (document.getElementById("autorefresh").checked == true)
+        generate()
+}
 
+function generate() {
+    var size = parseInt(document.getElementById("slider").value)
     size = (size % 2 == 0) ? size + 1 : size;
     const array = Array.from(Array(size), () => new Array(size))
 
@@ -21,7 +25,6 @@ function generate(size) {
             for (let y = 0; y < size; y++)
                 if (array[x][y] == 2)
                     numberOfBases++;
-
         if (numberOfBases == 0) // exit when there are no bases left
             break;
 
@@ -39,35 +42,28 @@ function generate(size) {
 
                         if (array[tmpX][tmpY] == 1)
                             break;
-
                         else
                             array[tmpX][tmpY] = 1;
 
                         i += (direction % 2 == 0) ? -1 : 1
                     }
                 }
-
                 if (array[x][y] == 2)
                     currentBase++
             }
     }
 
-    console.log(array)
-
-    var end = new Date().getTime()
-    var time = end - start
-    console.log('Execution time: ' + time)
-
-
-    var c = document.getElementById("myCanvas");
-    var ctx = c.getContext("2d");
-
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const xSize = canvas.width / size
+    const ySize = canvas.width / size
 
     for (let x = 0; x < size; x++)
         for (let y = 0; y < size; y++) {
             ctx.beginPath();
             if (array[x][y])
-                ctx.fillRect(x * 50, y * 50, 50, 50);
+                ctx.fillRect(x * xSize, y * ySize, xSize, ySize)
 
         }
 }

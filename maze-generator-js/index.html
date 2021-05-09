@@ -2,15 +2,19 @@
 
 <head>
     <title>maze generator</title>
-    <!--  <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <script src="main.js"></script>
 </head>
 
 <body>
-    <button onclick="generate(10)" class="btn btn-primary m-2">generate new maze</button>
-    <br>
-    <canvas id="myCanvas" class="m-2" width="600" height="600"></canvas>
+    <div>
+        <button onclick="generate()" class="btn btn-primary m-2">generate new maze</button>
+        <input onchange="valueChanged()" id="slider" type="range" min="11" max="201" value="21" step="2">
+        <label for="autorefresh">autorefresh</label>
+        <input type="checkbox" id="autorefresh">
+    </div>
+    <canvas id="canvas" width="1200" height="1200"></canvas>
 </body>
 
 </html>
