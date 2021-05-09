@@ -2,11 +2,15 @@
 #include <stdlib.h>
 #include <ctime>
 #include <fstream>
+#include <time.h>
 
 using namespace std;
 
 int main(int argc, char **argv)
 {
+    clock_t start, end;
+    start = clock();
+
     ofstream outputFile;
     int size = 10;
     srand(time(0));
@@ -102,5 +106,9 @@ int main(int argc, char **argv)
                << "]";
     outputFile.close();
 
+    end = clock();
+
+    double duration_sec = double(end - start) / CLOCKS_PER_SEC;
+    cout << duration_sec;
     return 0;
 }

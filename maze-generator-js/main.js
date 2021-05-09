@@ -1,4 +1,6 @@
+var start = new Date().getTime();
 var size = 10
+
 var array = Array.from(Array(size), () => new Array(size))
 
 for (let x = 0; x < size; x++) // generate walls and bases
@@ -50,3 +52,7 @@ while (true) {
 }
 
 console.log(array)
+
+var end = new Date().getTime();
+var time = end - start;
+console.log('Execution time: ' + time);
