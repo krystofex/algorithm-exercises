@@ -28,7 +28,7 @@ function generate() {
         if (numberOfBases == 0) // exit when there are no bases left
             break;
 
-        var randomBase = Math.floor(Math.random() * numberOfBases)
+        const randomBase = Math.floor(Math.random() * numberOfBases)
         var currentBase = 0
 
         for (let x = 2; x < size; x += 2)
@@ -53,8 +53,8 @@ function generate() {
             }
     }
 
-    var canvas = document.getElementById("canvas");
-    var ctx = canvas.getContext("2d");
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     const xSize = canvas.width / size
     const ySize = canvas.width / size
