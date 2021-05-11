@@ -11,22 +11,22 @@ function generate() {
     for (let x = 0; x < size; x++) // generate walls and bases
         for (let y = 0; y < size; y++) {
         if ((x == 0 || x == size - 1) || (y == 0 || y == size - 1))
-            array[x][y] = 1;
+            array[x][y] = 1
         else if (x % 2 == 0 && y % 2 == 0)
-            array[x][y] = 2;
+            array[x][y] = 2
         else
-            array[x][y] = 0;
+            array[x][y] = 0
     }
 
     while (true) {
-        var numberOfBases = 0;
+        var numberOfBases = 0
 
         for (let x = 0; x < size; x++)
             for (let y = 0; y < size; y++)
                 if (array[x][y] == 2)
-                    numberOfBases++;
+                    numberOfBases++
         if (numberOfBases == 0) // exit when there are no bases left
-            break;
+            break
 
         const randomBase = Math.floor(Math.random() * numberOfBases)
         var currentBase = 0
@@ -41,9 +41,9 @@ function generate() {
                         let tmpY = (direction > 1) ? y : y + i
 
                         if (array[tmpX][tmpY] == 1)
-                            break;
+                            break
                         else
-                            array[tmpX][tmpY] = 1;
+                            array[tmpX][tmpY] = 1
 
                         i += (direction % 2 == 0) ? -1 : 1
                     }
@@ -53,15 +53,15 @@ function generate() {
             }
     }
 
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const canvas = document.getElementById("canvas")
+    const ctx = canvas.getContext("2d")
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
     const xSize = canvas.width / size
     const ySize = canvas.width / size
 
     for (let x = 0; x < size; x++)
         for (let y = 0; y < size; y++) {
-            ctx.beginPath();
+            ctx.beginPath()
             if (array[x][y])
                 ctx.fillRect(x * xSize, y * ySize, xSize, ySize)
 
