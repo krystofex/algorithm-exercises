@@ -2,4 +2,5 @@ main
 maze.txt
 maze.json
 main.exe
-.vscode
+
+*.out
